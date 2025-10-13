@@ -3,19 +3,23 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #f2c849;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary)
+  --font-poppins: var(--font-poppins);
+  --font-hind: var(--font-hind);
+  --font-trio: var(--font-trio);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --primary: #f2c849;
   }
 }
 
