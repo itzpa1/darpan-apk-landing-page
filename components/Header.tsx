@@ -12,13 +12,13 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/10 bg-[#f2c849] backdrop-blur-xl">
       <div className="container mx-auto flex h-20 items-center justify-center md:justify-between px-6 md:px-8">
-        <div className="flex w-[200px] ">
+        <Link href={"/"} className="flex w-[200px] ">
           <Image
             src={assets.headerLogo}
             alt="logo"
             className="object-contain w-full self-center"
           />
-        </div>
+        </Link>
         <nav className="hidden md:flex items-center gap-8">
           {navlink.map((items, index) => (
             <Link
@@ -26,9 +26,7 @@ export function Header() {
               href={items.link}
               className={`
                 flex font-hind items-center gap-2 text-black rounded-full px-4 py-2 border-2 border-black/70 hover:border-black/30 ${
-                  items.name != "Features"
-                    ? "bg-[#FF9933]  "
-                    : ""
+                  items.name != "Features" ? "bg-[#FF9933]  " : ""
                 }`}
             >
               {items.icon}

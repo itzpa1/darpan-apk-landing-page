@@ -1,6 +1,6 @@
-// import { Button } from "./ui/button";
-// import { ImageWithFallback } from "./figma/ImageWithFallback";
+'use client'
 import { Download, Award, CheckCircle2, Smartphone } from "lucide-react";
+import Link from "next/link";
 import { SiFirebase, SiTensorflow } from "react-icons/si";
 import { TbBrandReactNative } from "react-icons/tb";
 
@@ -73,10 +73,10 @@ export function Hero() {
 
             {/* Download APK Button */}
             <div id="download" className="flex flex-col gap-4">
-              <button className="group relative bg-gradient-to-r from-[#FF9933] to-[#B22222] hover:from-[#E68A2E] hover:to-[#A01F1F] text-white shadow-2xl hover:shadow-[0_20px_60px_-15px_rgba(178,34,34,0.5)] transition-all duration-300 hover:scale-102 text-lg py-4 rounded-xl flex items-center justify-center gap-2 font-hind font-semibold ">
-                <Download size={24} className="mr-2 animate-bounce" />
-                <span>Download APK Now</span>
-              </button>
+                <button onClick={()=> alert('Link will be added soon! Work on Progress')} className="group relative bg-gradient-to-r from-[#FF9933] to-[#B22222] hover:from-[#E68A2E] hover:to-[#A01F1F] text-white shadow-2xl hover:shadow-[0_20px_60px_-15px_rgba(178,34,34,0.5)] transition-all duration-300 hover:scale-102 text-lg py-4 rounded-xl flex items-center justify-center gap-2 font-hind font-semibold ">
+                  <Download size={24} className="mr-2 animate-bounce" />
+                  <span>Download APK Now</span>
+                </button>
               <p className="text-sm text-black font-hind font-medium flex flex-col md:flex-row items-center gap-1 text-muted-foreground text-center lg:text-left">
                 <Smartphone size={20} /> Direct APK download • No App store
                 required • Instant Access
