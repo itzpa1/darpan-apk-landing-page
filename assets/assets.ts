@@ -1,17 +1,50 @@
 import headerLogo from "./header_logo.png";
 import logo from "./favicon.png";
 import grain from "./grain.jpg";
+import DanceHero from "./danceHero.png";
 import pawan from "./memoji-smile.png";
 import sunny from "./memoji-avatar-1.png";
 import anuska from "./memoji-avatar-2.png";
 import viraj from "./memoji-avatar-3.png";
 import jaya from "./memoji-avatar-4.png";
 import swastik from "./memoji-avatar-5.png";
+import Guru from "./guru.png";
+import Vision from "./vision.png";
+import Motivate from "./motivate.png";
+import Global from "./Global.png";
+import Accuracy from "./Accuracy.png";
+
+// techstack Icons
+import {
+  SiMediapipe,
+  SiPython,
+  SiPytorch,
+  SiHtml5,
+  SiJavascript,
+  SiCss3,
+  SiTensorflow,
+  SiNodedotjs,
+  SiDocker,
+  SiReact,
+  SiExpo,
+  SiVercel,
+  SiFirebase,
+  SiGooglegemini,
+  SiGithub,
+  SiCloudinary,
+  SiMongodb,
+  SiFastapi,
+  SiNetlify,
+  SiAmazonwebservices,
+} from "react-icons/si";
+import { GrServicePlay } from "react-icons/gr";
+import { StaticImageData } from "next/image";
 
 export const assets = {
   headerLogo,
   logo,
   grain,
+  DanceHero,
   pawan,
   sunny,
   viraj,
@@ -68,5 +101,68 @@ export const teamData = [
     course: "B.Sc Prog. CS",
     year: "3",
     avatar: swastik,
+  },
+];
+
+export const techStack = [
+  { name: "PyTorch", icon: SiPytorch },
+  { name: "Python", icon: SiPython },
+  { name: "MediaPipe", icon: SiMediapipe },
+  { name: "TensorFlow.js", icon: SiTensorflow },
+  { name: "Node.js", icon: SiNodedotjs },
+  { name: "Firebase", icon: SiFirebase },
+  { name: "Gemini", icon: SiGooglegemini },
+  { name: "Netlify", icon: SiNetlify },
+  { name: "Cloudinary", icon: SiCloudinary },
+  { name: "GitHub", icon: SiGithub },
+  { name: "React Native", icon: SiReact },
+  { name: "MongoDB", icon: SiMongodb },
+  { name: "HTML", icon: SiHtml5 },
+  { name: "Css", icon: SiCss3 },
+  { name: "js", icon: SiJavascript },
+  { name: "Yolo Vision", icon: GrServicePlay },
+  { name: "AWS", icon: SiAmazonwebservices },
+  { name: "Expo Go", icon: SiExpo },
+  { name: "Vercel", icon: SiVercel },
+  { name: "Fast API", icon: SiFastapi },
+];
+
+interface FeatureProps {
+  title: string;
+  desc: string;
+  position: boolean;
+  img: StaticImageData;
+}
+
+export const features: FeatureProps[] = [
+  {
+    title: "Accurate. Accessible. Authentic.",
+    desc: "Learning with DARPAN is interactive, and our research-backed approach works! With real-time pose correction and a vast digital library, you'&apos;'ll master ancient mudras while preserving cultural heritage.",
+    position: true,
+    img: Accuracy,
+  },
+  {
+    title: "Backed by AI Vision",
+    desc: "We use a combination of advanced computer vision pipelines and deep learning models to create a tool that effectively recognizes, classifies, and teaches complex hand gestures.",
+    position: false,
+    img: Vision,
+  },
+  {
+    title: "Stay Motivated",
+    desc: "We make it easy to form a habit of practice with game-like features and progression tracking. Get instant feedback and suggestions for correct forms to improve your skills efficiently.",
+    position: true,
+    img: Motivate,
+  },
+  {
+    title: "Your Personal Guru",
+    desc: "Combining the best of AI and dance knowledge, our AI Guru  is tailored to help you learn at your own pace. It answers your queries and provides detailed information  on every mudra.",
+    position: false,
+    img: Guru,
+  },
+  {
+    title: "Connect, learn, and preserve",
+    desc: "Join a global community to digitize and make traditional dance heritage accessible worldwide. dont put text something ",
+    position: true,
+    img: Global,
   },
 ];

@@ -1,5 +1,5 @@
 import { assets } from "@/assets/assets";
-import { Sparkles, Github, Linkedin, Mail, Heart } from "lucide-react";
+import { Github, Linkedin, Mail, Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -25,10 +25,10 @@ const socialLinks = [
 ];
 
 const projectInfo = [
-  { text: "info" },
-  { text: "info" },
-  { text: "info" },
-  { text: "info" },
+  { text: "Home", link: "/" },
+  { text: "Try Demo", link: "/demo" },
+  { text: "Meet Our Team", link: "/team" },
+  { text: "Download", link: "#download" },
 ];
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -46,7 +46,7 @@ export function Footer() {
                 className="object-contain w-full self-center"
               />
             </div>
-            <p className="text-muted-foreground max-w-sm leading-relaxed font-trio text-black text-center md:text-left">
+            <p className="max-w-sm leading-relaxed font-chi text-black text-center md:text-left">
               Preserving and promoting Bharat's rich dance heritage through
               innovative technology. A hackathon project celebrating cultural
               education.
@@ -55,24 +55,29 @@ export function Footer() {
 
           {/* Project Info */}
           <div className="space-y-4 flex flex-col items-center md:items-start">
-            <h4 className="text-black font-trio font-medium text-lg">
+            <h4 className="text-black font-mon font-semibold text-lg">
               Project Info
             </h4>
-            <ul className="list-disc">
+            <div className="flex flex-col gap-1">
               {projectInfo.map((items, index) => (
-                <li className="text-black font-trio" key={index}>
+                <Link
+                  key={index}
+                  href={items.link}
+                  className="text-black hover:underline font-semibold transition-colors inline-flex items-center gap-2 group font-nun"
+                >
+                  <span className="h-1 w-1 rounded-full bg-[#FF9933] group-hover:w-3 transition-all"></span>
                   {items.text}
-                </li>
+                </Link>
               ))}
-            </ul>
+            </div>
           </div>
 
           {/* Connect */}
           <div className="space-y-4 flex flex-col items-center md:items-start">
-            <h4 className="text-black font-trio font-medium text-lg">
+            <h4 className="text-black font-mon font-semibold text-lg">
               Connect With Us
             </h4>
-            <p className="font-trio text-black text-sm mb-4 text-center md:text-left">
+            <p className="font-nun font-semibold text-black text-sm md:text-base mb-4 text-center md:text-left">
               Get in touch with the team or contribute to the project
             </p>
             <div className="flex gap-3">
@@ -93,14 +98,17 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-black/20">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left font-hind font-semibold text-black">
-            <p className="font-hind text-sm">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left font-mon font-semibold text-black">
+            <p className="font-chi text-sm">
               &copy; {currentYear} Darpan. A tribute to Bharat's classical dance
               traditions.
             </p>
-            <div className="flex items-center gap-2 font-hind font-semibold text-black text-sm">
+            <div className="flex items-center gap-2 font-chi font-semibold text-black text-sm">
               <span className="">Made with</span>
-              <Heart size={16} className="text-[#B22222] fill-current animate-pulse self-center" />
+              <Heart
+                size={16}
+                className="text-[#B22222] fill-current animate-pulse self-center"
+              />
               <span className="">by The_Visionary</span>
             </div>
           </div>

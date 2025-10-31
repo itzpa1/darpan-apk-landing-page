@@ -1,33 +1,27 @@
 import type { Metadata } from "next";
-import {
-  Geist,
-  Geist_Mono,
-  Poppins,
-  Hind,
-  Tiro_Devanagari_Hindi,
-} from "next/font/google";
+import { Nunito, Montserrat,Chivo } from "next/font/google";
 import "./globals.css";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["devanagari", "latin", "latin-ext"],
-  weight: ["400", "500", "700", "900"],
-});
-
-const hind = Hind({
-  variable: "--font-hind",
-  subsets: ["devanagari", "latin", "latin-ext"],
-  weight: ["400", "500", "600"],
-});
-
-const trio = Tiro_Devanagari_Hindi({
-  variable: "--font-trio",
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "500", "600", "700", "800","900"],
+});
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
+const chivo = Chivo({
+  variable: "--font-chivo",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
-  title: "Darpan : Journey to soul",
+  title: "Darpan",
   description: "Bharatia Traditional Dance E-learning",
 };
 
@@ -38,9 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${poppins.variable} ${hind.variable} ${trio.variable} antialiased`}
-      >
+      <body className={`${nunito.variable} ${montserrat.variable} ${chivo.variable} antialiased`}>
         {children}
       </body>
     </html>
