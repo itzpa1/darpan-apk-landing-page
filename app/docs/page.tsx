@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-export function Instructions() {
+export default function Instructions() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white pt-24 pb-16">
       <div className="container mx-auto px-6 md:px-8 max-w-4xl">

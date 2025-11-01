@@ -32,7 +32,7 @@ const points = [
   { text: "Cultural context and historical insights" },
 ];
 
-export function Hero() {
+export default function Hero() {
   return (
     <section
       id="hero"

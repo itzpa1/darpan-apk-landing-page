@@ -31,7 +31,7 @@ const projectInfo = [
   { text: "Our Team", link: "/team" },
   { text: "Download", link: "#download" },
 ];
-export function Footer() {
+export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (

@@ -5,7 +5,7 @@ import { Download } from "lucide-react";
 import { Button } from "./ui/button";
 import { TbUserScan } from "react-icons/tb";
 
-export function Header({ scrolled }: { scrolled: boolean }) {
+export default function Header({ scrolled }: { scrolled: boolean }) {
   return (
     <header
       className={`sticky top-0 z-50 w-full border-b border-white/10 bg-[#f2c849] backdrop-blur-xl transition-all ${

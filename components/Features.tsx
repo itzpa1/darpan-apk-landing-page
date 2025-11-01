@@ -9,7 +9,7 @@ interface FeatureProps {
   img: StaticImageData;
 }
 
-export function Features({ title, position, desc, img }: FeatureProps) {
+export default function Features({ title, position, desc, img }: FeatureProps) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {

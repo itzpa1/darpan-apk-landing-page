@@ -1,8 +1,8 @@
 import { teamData } from "@/assets/assets";
 import React from "react";
-import { TeamCard } from "./TeamCard";
+// import { TeamCard } from "./TeamCard";
 
-export function TeamHeader() {
+export default function TeamHeader() {
   return (
     <section
       id="hero"
@@ -25,5 +25,3 @@ export function TeamHeader() {
     </section>
   );
 }
-
-export default TeamHeader;

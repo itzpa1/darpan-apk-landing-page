@@ -1,7 +1,7 @@
 import { tableData } from "@/assets/assets";
 import { RxSlider } from "react-icons/rx";
 
-export function Comparison() {
+export default function Comparison() {
   const platforms = [
     "DARPAN",
     "MudraMingle (Research)",
