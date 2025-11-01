@@ -1,5 +1,5 @@
-import { assets } from "@/assets/assets";
 import Image, { StaticImageData } from "next/image";
+import { useEffect, useState } from "react";
 
 interface FeatureProps {
   // Fixed typo and consistent naming
@@ -10,13 +10,34 @@ interface FeatureProps {
 }
 
 export function Features({ title, position, desc, img }: FeatureProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent || navigator.vendor;
+
+    const mobileRegex =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    setIsMobile(mobileRegex.test(userAgent));
+
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+
+  useEffect(() => {}, []);
+
   const TextPart = () => {
     return (
-      <div className="flex flex-col gap-4 items-start justify-center px-20">
-        <h1 className="font-chi text-4xl font-black text-[#ff9933]">
+      <div className="flex flex-col gap-4 items-start justify-center lg:px-20">
+        <h1 className="font-family-chi text-4xl font-black text-[#ff9933] text-center lg:text-left">
           {title}
         </h1>
-        <p className="font-nun font-bold text-justify leading-tight text-gray-900">
+        <p className="font-nun font-bold text-center lg:text-justify leading-tight text-gray-900 ">
           {desc}
         </p>
       </div>
@@ -44,9 +65,11 @@ export function Features({ title, position, desc, img }: FeatureProps) {
     );
   };
 
+  const shouldShowTextFirst = position || isMobile;
+
   return (
-    <div className="max-h-screen h-[80vh] grid lg:grid-cols-2 justify-start px-6 md:px-8">
-      {position ? (
+    <div className="max-h-screen h-[70vh] md:h-[80vh] grid lg:grid-cols-2 justify-start px-6 md:px-8">
+      {shouldShowTextFirst ? (
         <>
           <TextPart />
           <ImagePart />

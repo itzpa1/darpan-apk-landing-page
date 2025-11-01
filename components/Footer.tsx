@@ -2,6 +2,7 @@ import { assets } from "@/assets/assets";
 import { Github, Linkedin, Mail, Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const socialLinks = [
   {
@@ -27,15 +28,20 @@ const socialLinks = [
 const projectInfo = [
   { text: "Home", link: "/" },
   { text: "Try Demo", link: "/demo" },
-  { text: "Meet Our Team", link: "/team" },
+  { text: "Our Team", link: "/team" },
   { text: "Download", link: "#download" },
 ];
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-gradient-to-b from-white to-[#f2c849] overflow-hidden">
-      <div className="container mx-auto px-6 md:px-8 py-16">
+    <footer className="relative overflow-hidden flex flex-col">
+      <Image
+        src={assets.BottomBorder}
+        className="w-full object-cover object-center"
+        alt=""
+      />
+      <div className="container mx-auto px-6 md:px-8 pb-16 bg-[#f2c849]">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3 items-start">
           {/* Brand */}
           <div className="space-y-4 md:space-y-6 flex flex-col items-center md:items-start lg:col-span-1">
@@ -96,12 +102,15 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Language */}
+        <LanguageSwitcher />
+
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-black/20">
+        <div className="mt-16 pt-8 border-t border-white">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left font-mon font-semibold text-black">
             <p className="font-chi text-sm">
-              &copy; {currentYear} Darpan. A tribute to Bharat's classical dance
-              traditions.
+              &copy; {currentYear} Darpan.
+              <br />A tribute to Bharat's classical dance traditions.
             </p>
             <div className="flex items-center gap-2 font-chi font-semibold text-black text-sm">
               <span className="">Made with</span>

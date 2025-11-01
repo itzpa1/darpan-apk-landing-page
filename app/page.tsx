@@ -1,5 +1,6 @@
 "use client";
 import { features } from "@/assets/assets";
+import { Comparison } from "@/components/Comparison";
 import { Features } from "@/components/Features";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -25,6 +26,7 @@ export default function Home() {
         {features.map((items, idx) => (
           <Features key={idx} {...items} />
         ))}
+        <Comparison />
       </main>
       <Footer />
     </div>

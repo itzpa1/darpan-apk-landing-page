@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Nunito, Montserrat,Chivo } from "next/font/google";
+import "@flaticon/flaticon-uicons/css/all/all.css";
+// import type { Metadata } from "next";
 import "./globals.css";
 
 const nunito = Nunito({

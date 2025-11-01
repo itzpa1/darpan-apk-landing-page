@@ -13,6 +13,8 @@ import Vision from "./vision.png";
 import Motivate from "./motivate.png";
 import Global from "./Global.png";
 import Accuracy from "./Accuracy.png";
+import Border from "./border.png";
+import BottomBorder from './bottomBorder.png'
 
 // techstack Icons
 import {
@@ -51,6 +53,8 @@ export const assets = {
   jaya,
   anuska,
   swastik,
+  Border,
+  BottomBorder
 };
 
 export const teamData = [
@@ -164,5 +168,78 @@ export const features: FeatureProps[] = [
     desc: "Join a global community to digitize and make traditional dance heritage accessible worldwide. dont put text something ",
     position: true,
     img: Global,
+  },
+];
+
+export const tableData = [
+  {
+    feature: "Dance Mudra Focus",
+    darpan: "Yes",
+    mudraMingle: "Yes",
+    yolo: "Yes",
+    mediapipe: "No",
+  },
+  {
+    feature: "Real-Time Feedback",
+    darpan: "Yes",
+    mudraMingle: "Yes",
+    yolo: "No",
+    mediapipe: "Yes",
+  },
+  {
+    feature: "Educational/Tutorial Features",
+    darpan: "Yes",
+    mudraMingle: "No",
+    yolo: "No",
+    mediapipe: "No",
+  },
+  {
+    feature: "Multilingual Support",
+    darpan: "Yes",
+    mudraMingle: "No",
+    yolo: "No",
+    mediapipe: "No",
+  },
+  {
+    feature: "Community Learning/Support",
+    darpan: "Yes",
+    mudraMingle: "No",
+    yolo: "No",
+    mediapipe: "No",
+  },
+  {
+    feature: "Open Source",
+    darpan: "Planned",
+    mudraMingle: "Yes",
+    yolo: "Yes",
+    mediapipe: "No",
+  },
+  {
+    feature: "Dedicated Large Mudra Dataset",
+    darpan: "Planned",
+    mudraMingle: "No",
+    yolo: "No",
+    mediapipe: "No",
+  },
+  {
+    feature: "Customizable Models for Mudras",
+    darpan: "Yes",
+    mudraMingle: "No",
+    yolo: "Yes",
+    mediapipe: "No",
+  },
+  {
+    feature: "AR or Visual Overlay Feedback",
+    darpan: "Planned",
+    mudraMingle: "Yes",
+    yolo: "No",
+    mediapipe: "No",
+  },
+  {
+    feature: "Mobile/Edge Deployment Ready",
+    darpan: "Yes",
+    mudraMingle: "No",
+    yolo: "Yes",
+    mediapipe: "Yes",
   },
 ];

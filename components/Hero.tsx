@@ -48,9 +48,9 @@ export function Hero() {
       </div>
 
       <div className="container flex flex-col space-y-6 mx-auto px-6 md:px-8 py-16">
-        <div className="grid lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 lg:gap-0 lg:grid-cols-2">
           {/* Left Content */}
-          <div className="flex flex-col space-y-6">
+          <div className="flex flex-col items-center lg:items-start space-y-6">
             {/* Hackathon Badge */}
             <Button
               variant={"default"}
@@ -65,7 +65,7 @@ export function Hero() {
               </span>
             </Button>
 
-            <h1 className="bg-gradient-to-r from-[#FF9933] via-[#B22222] to-[#8B0000] bg-clip-text font-chi font-bold text-xl text-transparent leading-relaxed text-center w-fit selection:bg-[#ff9933] selection:text-white">
+            <h1 className="bg-gradient-to-r from-[#FF9933] via-[#B22222] to-[#8B0000] bg-clip-text font-chi font-bold text-2xl lg:text-xl text-transparent lg:leading-relaxed text-center w-fit selection:bg-[#ff9933] selection:text-white">
               Master Bharat's Traditional Dance <br /> Anytime, Anywhere!
             </h1>
 
@@ -80,11 +80,11 @@ export function Hero() {
             </div>
 
             {/* Download APK Button */}
-            <div id="download" className="flex flex-col gap-4 w-1/2">
+            <div id="download" className="flex flex-col gap-4 lg:w-1/2">
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   {/* <Button variant="outline">Show Dialog</Button> */}
-                  <Button className="text-white transition-all duration-300 text-lg py-6 flex items-center justify-center gap-2 uppercase font-mon font-semibold">
+                  <Button className=" text-white transition-all duration-300 text-lg py-6 flex items-center justify-center gap-2 uppercase font-mon font-semibold">
                     <Download className="size-6" />
                     <span>Download APK Now</span>
                   </Button>
@@ -115,7 +115,7 @@ export function Hero() {
               </Link>
             </div>
             {/* Tech Stack Badge */}
-            <div className="flex overflow-x-clip [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] border-t-3 border-b-3 border-gray-400/40 rounded-md py-4 relative z-10">
+            <div className="w-full flex overflow-x-clip [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] border-t-3 border-b-3 border-gray-400/40 rounded-md py-4 relative z-10">
               {/* <div className="absolute top-0 left-0 w-full h-full border-t-2 border-b-2 rounded-md border-black z-40 "></div> */}
               <div className="flex gap-8 pr-8 flex-none animate-moveLeft [animation-duration:90s] hover:animation-paused">
                 <Fragment>
