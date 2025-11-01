@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { assets } from "../assets/assets";
 import Link from "next/link";
-import { Download } from "lucide-react";
 import { Button } from "./ui/button";
 import { TbUserScan } from "react-icons/tb";
 

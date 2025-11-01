@@ -1,10 +1,10 @@
 "use client";
 import { features } from "@/assets/assets";
-import { Comparison } from "@/components/Comparison";
-import { Features } from "@/components/Features";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
-import { Hero } from "@/components/Hero";
+import Comparison from "@/components/Comparison";
+import Features from "@/components/Features";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
 import { useEffect, useState } from "react";
 
 export default function Home() {
