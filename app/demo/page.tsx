@@ -4,6 +4,8 @@ import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
+import MudraResultCard from "@/components/MudraResultCard";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,16 +16,31 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-type DetectionResult = {
-  predictions: {
-    class: string;
-    confidence: number;
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-  }[];
-};
+interface DetectionBox {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+interface DetectionPrediction extends DetectionBox {
+  confidence: number;
+  class: string;
+  class_id: number;
+}
+
+interface DetectionResult {
+  predictions: DetectionPrediction[];
+  image: { width: number; height: number };
+  time: number;
+}
+
+interface DetectionResultState {
+  imageSrc: string;
+  mudraName: string;
+  confidence: number;
+  box?: DetectionBox;
+}
 
 const MudraPage = () => {
   const [cameraStatus, setCameraStatus] = useState<
@@ -34,23 +51,16 @@ const MudraPage = () => {
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isLogoAreaDark, setIsLogoAreaDark] = useState(false); // New state for logo area darkness
+  const [isLogoAreaDark, setIsLogoAreaDark] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const detectionCanvasRef = useRef<HTMLCanvasElement>(null); // New canvas for darkness detection
-  const animationFrameRef = useRef<number>(null); // Ref for animation frame
-  const [mudras, setMudras] = useState<string | null>(null);
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
-
-  // Replace your alert() calls with this function
-  const showAlert = (message: string) => {
-    setAlertMessage(message);
-    setAlertOpen(true);
-  };
+  const detectionCanvasRef = useRef<HTMLCanvasElement>(null);
+  const animationFrameRef = useRef<number>(null);
+  const [detectedResult, setDetectedResult] =
+    useState<DetectionResultState | null>(null);
 
   // Detect device type
   useEffect(() => {
@@ -73,10 +83,6 @@ const MudraPage = () => {
     return () => window.removeEventListener("resize", checkDeviceType);
   }, []);
 
-  /**
-   * Detects if the area around the logo (top-right corner) is dark
-   * Uses luminance calculation to determine brightness
-   */
   const detectLogoAreaDarkness = () => {
     if (
       !videoRef.current ||
@@ -91,18 +97,14 @@ const MudraPage = () => {
 
     if (!ctx) return;
 
-    // Set canvas size to match video
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
 
-    // Define logo area detection region (top-right corner)
-    // Adjust these values based on where your logo is positioned
-    const detectionWidth = canvas.width * 0.35; // 15% of width from right
-    const detectionHeight = canvas.height * 0.3; // 10% of height from top
-    const detectionX = canvas.width - detectionWidth; // Start from right edge
-    const detectionY = 0; // Start from top edge
+    const detectionWidth = canvas.width * 0.35;
+    const detectionHeight = canvas.height * 0.3;
+    const detectionX = canvas.width - detectionWidth;
+    const detectionY = 0;
 
-    // Draw only the logo area region
     ctx.drawImage(
       video,
       detectionX,
@@ -115,33 +117,24 @@ const MudraPage = () => {
       detectionHeight
     );
 
-    // Get image data from the detection area
     const imageData = ctx.getImageData(0, 0, detectionWidth, detectionHeight);
     const data = imageData.data;
 
-    // Calculate average brightness using luminance formula
     let totalBrightness = 0;
     const pixelCount = detectionWidth * detectionHeight;
 
     for (let i = 0; i < data.length; i += 4) {
-      const r = data[i]; // Red channel
-      const g = data[i + 1]; // Green channel
-      const b = data[i + 2]; // Blue channel
-
-      // Calculate luminance (perceived brightness)
-      // Standard luminance formula: 0.299*R + 0.587*G + 0.114*B
+      const r = data[i];
+      const g = data[i + 1];
+      const b = data[i + 2];
       const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
       totalBrightness += luminance;
     }
 
     const averageBrightness = totalBrightness / pixelCount;
-
-    // Consider it dark if brightness is below 0.4 (40%)
-    // You can adjust this threshold as needed
     const isDark = averageBrightness < 0.4;
     setIsLogoAreaDark(isDark);
 
-    // Continue detection loop if camera is active
     if (cameraStatus === "active") {
       animationFrameRef.current = requestAnimationFrame(detectLogoAreaDarkness);
     }
@@ -153,7 +146,6 @@ const MudraPage = () => {
       setCameraStatus("loading");
       setError(null);
 
-      // Stop existing stream
       if (streamRef.current) {
         streamRef.current.getTracks().forEach((track) => track.stop());
       }
@@ -176,7 +168,6 @@ const MudraPage = () => {
             ?.play()
             .then(() => {
               setCameraStatus("active");
-              // Start darkness detection when camera becomes active
               animationFrameRef.current = requestAnimationFrame(
                 detectLogoAreaDarkness
               );
@@ -200,26 +191,39 @@ const MudraPage = () => {
     new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = (err) => reject(err);
+      reader.onload = () => {
+        console.log(
+          "File converted to base64, length:",
+          (reader.result as string).length
+        );
+        resolve(reader.result as string);
+      };
+      reader.onerror = (err) => {
+        console.error("File conversion error:", err);
+        reject(err);
+      };
     });
 
   // Handle API result
-  const handleResult = (result: DetectionResult) => {
-    // Check if we have valid predictions
-    console.log(result);
-    if (
-      result.predictions &&
-      result.predictions.length > 0 &&
-      result.predictions[0].class
-    ) {
-      const mudraClass = result.predictions[0].class;
-      showAlert(`Detected Mudra: ${mudraClass}`);
+  const handleResult = (result: DetectionResult, imageSrc: string) => {
+    console.log("Full response:", JSON.stringify(result, null, 2));
+
+    if (result?.predictions?.length) {
+      const pred = result.predictions[0];
+
+      setDetectedResult({
+        imageSrc,
+        mudraName: pred.class,
+        confidence: pred.confidence,
+        box: {
+          x: pred.x,
+          y: pred.y,
+          width: pred.width,
+          height: pred.height,
+        },
+      });
     } else {
-      setError("No mudra detected. Please try again with a clearer image.");
-      setTimeout(() => {
-        setError(null);
-      }, 2000);
+      setError("No mudra detected. Please try again.");
     }
   };
 
@@ -236,9 +240,10 @@ const MudraPage = () => {
     try {
       const imageBase64 = await toBase64(file);
       const res = await axios.post("/api/detect-mudra", { imageBase64 });
-      handleResult(res.data);
-    } catch (err) {
-      console.error(err);
+
+      handleResult(res.data, imageBase64); // ✅ pass base64 as imageSrc
+    } catch (err: any) {
+      console.error("File upload error:", err);
       setError("Error detecting mudra. Please try again.");
     } finally {
       setLoading(false);
@@ -265,20 +270,17 @@ const MudraPage = () => {
         return;
       }
 
-      // Set canvas size to match video
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
 
-      // Draw current video frame to canvas
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      // Convert to base64
       const imageBase64 = canvas.toDataURL("image/jpeg", 0.8);
-
       const res = await axios.post("/api/detect-mudra", { imageBase64 });
-      handleResult(res.data);
-    } catch (err) {
-      console.error(err);
+
+      handleResult(res.data, imageBase64); // ✅ pass captured image
+    } catch (err: any) {
+      console.error("Camera capture error:", err);
       setError("Error detecting mudra. Please try again.");
     } finally {
       setLoading(false);
@@ -294,7 +296,6 @@ const MudraPage = () => {
   useEffect(() => {
     startCamera();
 
-    // Cleanup on unmount
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
@@ -325,28 +326,15 @@ const MudraPage = () => {
       </h1>
 
       {/* Mudra Name */}
-      <AlertDialog open={alertOpen} onOpenChange={setAlertOpen}>
-        <AlertDialogContent className="bg-white rounded-lg">
-          <AlertDialogHeader>
-            <AlertDialogTitle className="text-[#ff9933] font-family-mon flex items-center gap-2">
-              Mudra Detected Successfully!
-            </AlertDialogTitle>
-            <AlertDialogDescription className="text-black font-family-nun text-lg font-medium">
-              {alertMessage.split("\n").map((line, index) => (
-                <span key={index}>{line}</span>
-              ))}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction
-              onClick={() => setAlertOpen(false)}
-              className="bg-green-500 hover:bg-green-600 text-white"
-            >
-              Continue
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      {detectedResult && (
+        <MudraResultCard
+          imageSrc={detectedResult.imageSrc}
+          mudraName={detectedResult.mudraName}
+          confidence={detectedResult.confidence}
+          box={detectedResult.box}
+          onClose={() => setDetectedResult(null)}
+        />
+      )}
 
       {/* Controls UI */}
       <div className="absolute bottom-8 w-full flex justify-center">
@@ -438,7 +426,7 @@ const MudraPage = () => {
 
       {/* Error Message */}
       {error && (
-        <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-500/40 border-2 border-b-4 border-white text-white rounded-md backdrop-blur-sm font-family-mon leading-tight font-medium py-2 px-1 text-center">
+        <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-500/40 border-2 border-b-4 border-white text-white rounded-md backdrop-blur-sm font-family-mon leading-tight font-medium py-2 px-1 text-center z-40">
           {error}
         </p>
       )}

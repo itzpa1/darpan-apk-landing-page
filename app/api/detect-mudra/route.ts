@@ -10,17 +10,32 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No image provided" }, { status: 400 });
     }
 
-    const response = await axios({
-      method: "POST",
-      url: "https://serverless.roboflow.com/bharatanatyam-mudra/1",
-      params: {
-        api_key: process.env.ROBOFLOW_API_KEY,
-        ...(imageUrl ? { image: imageUrl } : {}),
-      },
-      data: imageBase64 || undefined,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
+    let dataToSend: string;
+    const apiUrl = `https://detect.roboflow.com/dance-mudras-yolo-v8/2?api_key=${process.env.ROBOFLOW_API_KEY}`;
+
+    if (imageBase64) {
+      // Remove "data:image/png;base64," if included
+      const cleanBase64 = imageBase64.includes("base64,")
+        ? imageBase64.split("base64,")[1]
+        : imageBase64;
+
+      dataToSend = cleanBase64;
+    } else {
+      // When using image URL instead of base64
+      return await axios
+        .post(apiUrl + `&image=${encodeURIComponent(imageUrl)}`)
+        .then((r) => NextResponse.json(r.data))
+        .catch((e) =>
+          NextResponse.json(
+            { error: "Roboflow URL inference failed", details: e.message },
+            { status: 500 }
+          )
+        );
+    }
+
+    // Send base64 image data
+    const response = await axios.post(apiUrl, dataToSend, {
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
     });
 
     return NextResponse.json(response.data);

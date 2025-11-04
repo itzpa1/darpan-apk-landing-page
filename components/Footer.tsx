@@ -35,13 +35,13 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden flex flex-col">
+    <footer className="relative overflow-hidden flex flex-col items-center bg-gradient-to-b from-white to-[#f2c849] from-20% to-20%">
       <Image
         src={assets.BottomBorder}
         className="w-full object-cover object-center"
         alt=""
       />
-      <div className="container mx-auto px-6 md:px-8 pb-16 bg-[#f2c849]">
+      <div className="container px-6 md:px-8 pb-16 bg-[#f2c849]">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3 items-start">
           {/* Brand */}
           <div className="space-y-4 md:space-y-6 flex flex-col items-center md:items-start lg:col-span-1">
