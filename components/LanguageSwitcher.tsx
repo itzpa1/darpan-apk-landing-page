@@ -20,12 +20,15 @@ export default function LanguageSwitcher() {
       <div className="border-2 border-b-4 border-[#ff9933] bg-white rounded-md px-3 py-1 flex items-center gap-1">
         <FaGlobeAmericas color="#ff9933" />
         <select
-          onChange={(e) => changeLanguage(e.target.value)}
+          // onChange={(e) => changeLanguage(e.target.value)}
           className=" font-family-mon font-medium"
         >
           <option value="en">English</option>
-          <option value="es">Español</option>
-          <option value="fr">Français</option>
+          <option value="hi">हिन्दी (Hindi)</option>
+          <option value="bn">বাংলা (Bengali)</option>
+          <option value="ta">தமிழ் (Tamil)</option>
+          <option value="te">తెలుగు (Telugu)</option>
+          <option value="mr">मराठी (Marathi)</option>
         </select>
       </div>
     </div>

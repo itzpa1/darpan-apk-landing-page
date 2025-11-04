@@ -192,10 +192,10 @@ const MudraPage = () => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        console.log(
-          "File converted to base64, length:",
-          (reader.result as string).length
-        );
+        // console.log(
+        //   "File converted to base64, length:",
+        //   (reader.result as string).length
+        // );
         resolve(reader.result as string);
       };
       reader.onerror = (err) => {
@@ -206,7 +206,7 @@ const MudraPage = () => {
 
   // Handle API result
   const handleResult = (result: DetectionResult, imageSrc: string) => {
-    console.log("Full response:", JSON.stringify(result, null, 2));
+    // console.log("Full response:", JSON.stringify(result, null, 2));
 
     if (result?.predictions?.length) {
       const pred = result.predictions[0];

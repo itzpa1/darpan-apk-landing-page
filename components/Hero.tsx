@@ -128,7 +128,9 @@ export default function Hero() {
                           className="flex items-center gap-2 uppercase"
                         >
                           <IconComponent size={24} />
-                          <span className="font-mon font-semibold tracking-wider">{items.name}</span>
+                          <span className="font-mon font-semibold tracking-wider">
+                            {items.name}
+                          </span>
                         </div>
                       );
                     }
