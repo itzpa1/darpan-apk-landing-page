@@ -118,7 +118,7 @@ export default function Footer() {
                 size={16}
                 className="text-[#B22222] fill-current animate-pulse self-center"
               />
-              <span className="">by Code.Itzpa1</span>
+              <span className="">by <Link href={'https://linkedin.com/in/itzpa1'} target="_blank" className="underline hover:no-underline">Code.Itzpa1</Link></span>
             </div>
           </div>
         </div>
