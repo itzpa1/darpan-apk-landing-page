@@ -1,36 +1,160 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💃 DARPAN — AI Bharatanatyam Pose Recognition
 
-## Getting Started
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/Roboflow-6706CE?style=for-the-badge&logo=roboflow&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vercel-Deployed-black?style=for-the-badge&logo=vercel" />
+  <img src="https://img.shields.io/badge/Open%20Source-Public-success?style=for-the-badge" />
+</p>
 
-First, run the development server:
+<p align="center">
+  <b>AI-powered Bharatanatyam pose recognition — built for dancers, learners & creators.</b>
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<p align="center">
+  🌐 <a href="https://darpan-apk.vercel.app/">Live Demo</a> • 🤖 Computer Vision • 🎭 Indian Classical Dance
+</p>
+
+![Darpan AI Dance App](./preview/home.png)
+
+---
+
+## ✨ Why Darpan?
+
+**Darpan** brings together **Indian classical dance and modern AI**.  
+Using a Roboflow-trained Bharatanatyam pose detection model, Darpan allows anyone to recognize dance poses directly from their camera — **no login, no install, fully web-based**.
+
+This project is **public** and **anyone can use it** by plugging in their own **Roboflow API key**.
+
+---
+
+## 🚀 Features
+
+- 📸 Real-time camera-based pose detection
+- 🧠 Roboflow-hosted Bharatanatyam AI model
+- ⚡ Built with Next.js for speed & performance
+- 🌐 Runs entirely in the browser
+- 🔑 Bring-your-own Roboflow API key
+- 🛡️ Privacy-first (no data stored)
+
+---
+
+## 🧠 How It Works
+
+1. User grants camera access
+2. Video frames are sent to Roboflow inference
+3. AI model detects Bharatanatyam poses
+4. Results are rendered instantly on screen
+
+> No images or videos are saved — everything stays local.
+
+---
+
+## 🔑 Get Your Roboflow API Key (Required)
+
+To use or deploy Darpan yourself:
+
+1. Visit 👉 https://roboflow.com
+2. Sign up / log in
+3. Go to **Dashboard → Settings → API Keys**
+4. Generate a new API key
+5. Copy & use it in your environment variables
+
+---
+
+## 🧩 Bharatanatyam Model (Roboflow)
+
+You can:
+
+- Use your own Bharatanatyam dataset
+- Or reuse an existing trained model
+
+Required details:
+
+- Workspace name
+- Project name
+- Model version
+
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env.local` file:
+
+```env
+ROBOFLOW_API_KEY=
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+⚠️ `NEXT_PUBLIC_` prefix required if inference runs on the client.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧑‍💻 Run Locally
 
-## Learn More
+```bash
+git clone https://github.com/your-username/darpan.git
+cd darpan
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Visit: http://localhost:3000
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🌍 Deploy Your Own
 
-## Deploy on Vercel
+Darpan is deployed using **Vercel**.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Steps:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Fork the repository
+2. Add environment variables in Vercel
+3. Deploy 🚀
+
+---
+
+## 🎯 Use Cases
+
+- Bharatanatyam students & learners
+- Dance teachers & academies
+- Cultural preservation projects
+- AI + art experiments
+- Computer vision demos
+
+---
+
+## 🛡️ Privacy
+
+- ❌ No authentication
+- ❌ No storage
+- ✅ Camera access is local-only
+- ✅ You control your API key
+
+---
+
+## 🙌 Credits
+
+Built with ❤️ by **Code.itzpa1**
+
+- GitHub: https://github.com/itzpa1
+- LinkedIn: https://linkedin.com/in/itzpa1
+
+**Tools & Platforms**
+
+- Roboflow (Model hosting & inference)
+- Next.js
+- Vercel
+
+---
+
+## ⭐ Support the Project
+
+If you found this project useful or inspiring:
+
+👉 **Give this repository a ⭐ on GitHub**  
+It helps the project reach more developers, dancers & creators 🚀
+
+---
+
+> _Blending tradition with technology — one pose at a time._ 💃🤖

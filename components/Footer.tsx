@@ -118,7 +118,7 @@ export default function Footer() {
                 size={16}
                 className="text-[#B22222] fill-current animate-pulse self-center"
               />
-              <span className="">by The_Visionary</span>
+              <span className="">by Code.Itzpa1</span>
             </div>
           </div>
         </div>
