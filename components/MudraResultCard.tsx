@@ -64,18 +64,25 @@ export default function MudraResultCard({
   }, [imageSrc, box, mudraName, confidence]);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-md z-50 p-4">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="mudra-name"
+      className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-md z-50 p-4"
+    >
       <div className="bg-white rounded-2xl shadow-xl p-4 w-[90%] max-w-md text-center relative border-2 border-[#f2c849]">
         <button
+          id="mudra-result-close-btn"
           onClick={onClose}
-          className="absolute -top-3 -right-3 hover:text-black bg-[#f2c849] w-10 h-10 rounded-full flex items-center justify-center"
+          aria-label="Close"
+          className="absolute -top-3 -right-3 hover:text-black bg-[#f2c849] w-10 h-10 rounded-full flex items-center justify-center border-2 border-b-4 border-black/30 active:translate-y-[2px] active:border-b-2 transition-all duration-200"
         >
           <i className="fi fi-br-cross text-white"></i>
         </button>
 
         <canvas ref={canvasRef} className="w-full rounded-lg object-contain" />
 
-        <p className="mt-4 text-xl uppercase font-semibold text-gray-800 font-family-mon">
+        <p id="mudra-name" className="mt-4 text-xl uppercase font-semibold text-gray-800 font-family-mon">
           {mudraName}
         </p>
         <p className="text-gray-600 font-family-nun">

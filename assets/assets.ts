@@ -3,11 +3,6 @@ import logo from "./favicon.png";
 import grain from "./grain.jpg";
 import DanceHero from "./danceHero.png";
 import pawan from "./memoji-smile.png";
-import sunny from "./memoji-avatar-1.png";
-import anuska from "./memoji-avatar-2.png";
-import viraj from "./memoji-avatar-3.png";
-import jaya from "./memoji-avatar-4.png";
-import swastik from "./memoji-avatar-5.png";
 import Guru from "./guru.png";
 import Vision from "./vision.png";
 import Motivate from "./motivate.png";
@@ -48,65 +43,26 @@ export const assets = {
   grain,
   DanceHero,
   pawan,
-  sunny,
-  viraj,
-  jaya,
-  anuska,
-  swastik,
   Border,
   BottomBorder
 };
 
-export const teamData = [
-  {
-    name: "Pawan Kumar",
-    role: "Leader",
-    social: [{ name: "mail", link: "pawankumarfz12@gmail.com" }],
-    course: "B.Sc Hons Mathematics",
-    year: "3",
-    avatar: pawan,
-  },
-  // {
-  //   name: "Sunny Kumar",
-  //   role: "Co-Leader",
-  //   social: [{ name: "mail", link: "pawankumarfz12@gmail.com" }],
-  //   course: "B.Sc Hons Mathematics",
-  //   year: "3",
-  //   avatar: sunny,
-  // },
-  // {
-  //   name: "Viraj Tanti",
-  //   role: "Member",
-  //   social: [{ name: "mail", link: "pawankumarfz12@gmail.com" }],
-  //   course: "B.Sc Hons Mathematics",
-  //   year: "3",
-  //   avatar: viraj,
-  // },
-  // {
-  //   name: "Jaya Sinha",
-  //   role: "Member",
-  //   social: [{ name: "mail", link: "pawankumarfz12@gmail.com" }],
-  //   course: "B.Sc Hons CS",
-  //   year: "3",
-  //   avatar: jaya,
-  // },
-  // {
-  //   name: "Anuska Pohal",
-  //   role: "Member",
-  //   social: [{ name: "mail", link: "pawankumarfz12@gmail.com" }],
-  //   course: "B.Sc Prog. CS",
-  //   year: "2",
-  //   avatar: anuska,
-  // },
-  // {
-  //   name: "Swastik Tiwari",
-  //   role: "Member",
-  //   social: [{ name: "mail", link: "pawankumarfz12@gmail.com" }],
-  //   course: "B.Sc Prog. CS",
-  //   year: "3",
-  //   avatar: swastik,
-  // },
-];
+export const userData = {
+  name: "Pawan Kumar",
+  role: "Leader/Developer",
+  mail: "pehlalevel@gmail.com",
+  github: "https://github.com/itzpa1",
+  linkedin: "https://linkedin.com/in/itzpa1",
+  portfolio: "https://codeitzpa1.vercel.app",
+  course: "B.Sc Hons Maths",
+  year: "3rd Year",
+  avatar: pawan,
+  specialty: "Next.js",
+  timeTaken: "3 Days",
+  hours: "150+",
+  duration: "12 Mo",
+  banner: "from-amber-600 via-yellow-500 to-[#f2c849]",
+};
 
 export const techStack = [
   { name: "PyTorch", icon: SiPytorch },

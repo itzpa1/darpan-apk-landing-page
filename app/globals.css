@@ -41,6 +41,10 @@
   --font-nunito: "Nunito", sans-serif;
   --font-montserrat: "Montserrat", sans-serif;
   --font-chivo: "Chivo", sans-serif;
+  --font-noto-devanagari: "Noto Sans Devanagari", sans-serif;
+  --font-noto-bengali: "Noto Sans Bengali", sans-serif;
+  --font-noto-tamil: "Noto Sans Tamil", sans-serif;
+  --font-noto-telugu: "Noto Sans Telugu", sans-serif;
   --font-nun: var(--font-nunito);
   --font-mon: var(--font-montserrat);
   --font-chi: var(--font-chivo);
@@ -171,3 +175,100 @@
 .font-chi {
   font-family: var(--font-chivo);
 }
+
+/* Language-specific font overrides */
+[data-lang="hi"] .font-nun,
+[data-lang="mr"] .font-nun,
+[data-lang="hi"] .font-chi,
+[data-lang="mr"] .font-chi {
+  font-family: var(--font-noto-devanagari), var(--font-nunito);
+}
+[data-lang="hi"] .font-mon,
+[data-lang="mr"] .font-mon {
+  font-family: var(--font-noto-devanagari), var(--font-montserrat);
+}
+
+[data-lang="bn"] .font-nun,
+[data-lang="bn"] .font-chi {
+  font-family: var(--font-noto-bengali), var(--font-nunito);
+}
+[data-lang="bn"] .font-mon {
+  font-family: var(--font-noto-bengali), var(--font-montserrat);
+}
+
+[data-lang="ta"] .font-nun,
+[data-lang="ta"] .font-chi {
+  font-family: var(--font-noto-tamil), var(--font-nunito);
+}
+[data-lang="ta"] .font-mon {
+  font-family: var(--font-noto-tamil), var(--font-montserrat);
+}
+
+[data-lang="te"] .font-nun,
+[data-lang="te"] .font-chi {
+  font-family: var(--font-noto-telugu), var(--font-nunito);
+}
+[data-lang="te"] .font-mon {
+  font-family: var(--font-noto-telugu), var(--font-montserrat);
+}
+
+/* Animations & Keyframes */
+@keyframes floatHero {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-float {
+  animation: floatHero 6s ease-in-out infinite;
+}
+
+@keyframes pulseSlow {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 8s ease-in-out infinite;
+}
+
+@keyframes pulseSlower {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.08);
+  }
+}
+
+.animate-pulse-slower {
+  animation: pulseSlower 12s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 15px rgba(242, 200, 73, 0.2));
+  }
+  50% {
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 25px rgba(242, 200, 73, 0.45));
+  }
+}
+
+.animate-logo-pulse {
+  animation: logoPulse 1.8s ease-in-out infinite;
+}
+
+

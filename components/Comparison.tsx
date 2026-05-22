@@ -1,31 +1,51 @@
+"use client";
+import { useEffect, useState, useRef } from "react";
 import { tableData } from "@/assets/assets";
 import { RxSlider } from "react-icons/rx";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Comparison() {
-  const platforms = [
-    "DARPAN",
-    "MudraMingle (Research)",
-    "YOLO V8",
-    "MediaPipe/Commercial API",
-  ];
+  const { t } = useLanguage();
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   const StatusBadge = ({ status }: { status: string }) => {
     const getStatusStyle = (status: string) => {
       switch (status.toLowerCase()) {
         case "yes":
-          return "bg-[#f2c849]/50 text-green-800 border-green-200";
+          return "bg-green-50 text-green-700 border-green-200/60";
         case "planned":
-          return "bg-yellow-100 text-yellow-800 border-yellow-200";
+          return "bg-amber-50 text-amber-700 border-amber-200/60";
         case "no":
-          return "bg-red-100 text-red-800 border-red-200";
+          return "bg-rose-50 text-rose-700 border-rose-200/60";
         default:
-          return "bg-gray-100 text-gray-800 border-gray-200";
+          return "bg-zinc-50 text-zinc-700 border-zinc-200/60";
       }
     };
 
     return (
       <span
-        className={`px-3 py-1 rounded-full border text-sm font-medium ${getStatusStyle(
+        className={`px-3 py-1 rounded-full border text-xs font-bold tracking-wider uppercase ${getStatusStyle(
           status
         )}`}
       >
@@ -33,54 +53,59 @@ export default function Comparison() {
       </span>
     );
   };
+
   return (
-    <div className="lg:h-screen flex flex-col items-center px-6 py-6 md:px-8 space-y-12">
-      <h1 className="font-family-chi font-bold text-4xl text-center">
-        Fast, flexible testing for today&apos;s students
-      </h1>
-      <span className="md:hidden uppercase text-xs font-family-nun font-medium text-center flex flex-col items-center">
-        <RxSlider size={20} />
-        Slide table to view full table
-      </span>
-      <div className="w-full lg:w-2/3 overflow-x-auto border-l-2 border-r-2 border-b-4 border-gray-400/40 rounded-lg p-2">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="border-b-2 border-gray-200 font-family-mon text-sm md:base">
-              <th className="py-2 font-semibold text-gray-700">Feature</th>
-              <th className="py-2 bg-gradient-to-b from-[#f2c849]/80 to-[#ff9933] text-white font-bold rounded-t-lg">
-                DARPAN
-              </th>
-              <th className="py-2 font-semibold text-gray-700">MudraMingle</th>
-              <th className="py-2 font-semibold text-gray-700">YOLO V8</th>
-              <th className="py-2 font-semibold text-gray-700">MediaPipe</th>
-            </tr>
-          </thead>
-          <tbody className="font-family-mon text-sm md:text-base font-medium">
-            {tableData.map((row, index) => (
-              <tr
-                key={index}
-                className="border-b border-gray-100 hover:bg-gray-50"
-              >
-                <td className="py-2 font-semibold text-gray-600">
-                  {row.feature}
-                </td>
-                <td className="py-2 bg-blue-50 text-center">
-                  <StatusBadge status={row.darpan} />
-                </td>
-                <td className="py-2 text-center">
-                  <StatusBadge status={row.mudraMingle} />
-                </td>
-                <td className="py-2 text-center">
-                  <StatusBadge status={row.yolo} />
-                </td>
-                <td className="py-2 text-center">
-                  <StatusBadge status={row.mediapipe} />
-                </td>
+    <section ref={sectionRef} id="comparison" className="py-16 md:py-28 flex flex-col items-center px-6 md:px-8 space-y-12 max-w-6xl mx-auto w-full">
+      <div className={`w-full flex flex-col items-center space-y-12 transition-all duration-1000 ease-out transform ${
+        isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-[0.98]"
+      }`}>
+        <h2 className="font-mon font-extrabold text-3xl md:text-4xl text-zinc-950 text-center tracking-tight max-w-2xl leading-tight">
+          {t.comparison.heading}
+        </h2>
+        <span className="md:hidden uppercase text-[10px] font-mon font-bold text-zinc-500 text-center flex flex-col items-center gap-1">
+          <RxSlider size={18} className="text-[#f2c849]" />
+          {t.comparison.slideHint}
+        </span>
+        <div className="w-full lg:w-11/12 overflow-x-auto border-2 border-[#f2c849]/20 hover:border-[#f2c849]/40 rounded-[2.2rem] p-4 bg-white/40 backdrop-blur-sm shadow-2xl transition-all duration-300">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="border-b border-[#f2c849]/20 font-mon text-xs md:text-sm uppercase tracking-wider text-zinc-500">
+                <th scope="col" className="py-4 px-4 text-left font-bold text-zinc-700">{t.comparison.featureCol}</th>
+                <th scope="col" className="py-4 px-4 bg-gradient-to-tr from-amber-600 via-yellow-500 to-[#f2c849] text-black font-black text-center rounded-[1.2rem] shadow-sm tracking-widest">
+                  DARPAN
+                </th>
+                <th scope="col" className="py-4 px-4 text-center font-bold text-zinc-600">MudraMingle</th>
+                <th scope="col" className="py-4 px-4 text-center font-bold text-zinc-600">YOLO V8</th>
+                <th scope="col" className="py-4 px-4 text-center font-bold text-zinc-600">MediaPipe</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="font-nun text-sm md:text-base font-semibold text-zinc-700">
+              {tableData.map((row, index) => (
+                <tr
+                  key={index}
+                  className="border-b border-zinc-100 hover:bg-[#f2c849]/5 transition-colors duration-200"
+                >
+                  <td className="py-4 px-4 font-bold text-zinc-800">
+                    {t.comparison.features[index] || row.feature}
+                  </td>
+                  <td className="py-4 px-4 bg-amber-50/20 text-center font-bold">
+                    <StatusBadge status={row.darpan} />
+                  </td>
+                  <td className="py-4 px-4 text-center">
+                    <StatusBadge status={row.mudraMingle} />
+                  </td>
+                  <td className="py-4 px-4 text-center">
+                    <StatusBadge status={row.yolo} />
+                  </td>
+                  <td className="py-4 px-4 text-center">
+                    <StatusBadge status={row.mediapipe} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
